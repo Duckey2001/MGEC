@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MGEC - Makhethe Green Environment Consultancy</title>
+    <!-- Tailwind + Font Awesome (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
+        /* Poppins import */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
-        
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-        
+        * { font-family: 'Poppins', sans-serif; }
+
+        /* Custom utilities */
         .gradient-bg {
             background: linear-gradient(135deg, #1a5f2a 0%, #2d8f4e 50%, #4caf50 100%);
         }
-        
-        .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        }
-        
         .card-hover {
             transition: all 0.3s ease;
         }
-        
         .card-hover:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
-        
         .nav-link {
             position: relative;
         }
-        
         .nav-link::after {
             content: '';
             position: absolute;
@@ -45,60 +37,74 @@
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
-        
         .nav-link:hover::after {
             width: 100%;
         }
-        
         .scroll-animate {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
-        
         .scroll-animate.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
         .pulse-animation {
             animation: pulse 2s infinite;
         }
-        
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        
         .float-animation {
             animation: float 3s ease-in-out infinite;
         }
-        
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
         .shimmer {
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             background-size: 200% 100%;
             animation: shimmer 2s infinite;
         }
-        
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
         }
-        
         .glass-effect {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        /* mobile menu toggle */
+        #mobile-menu.hidden { display: none; }
+        #mobile-menu:not(.hidden) { display: block; }
+        .service-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .group:hover .service-img {
+            transform: scale(1.1);
+        }
+        .service-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .bg-fixed-hero {
+            background-attachment: fixed;
+        }
+        @media (max-width: 640px) {
+            .bg-fixed-hero { background-attachment: scroll; }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
+
+    <!-- ========== NAVIGATION ========== -->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -111,42 +117,32 @@
                         <p class="text-xs text-gray-500">Since 2013</p>
                     </div>
                 </div>
-                
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Home</a>
-                    <a href="stationery.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Stationery</a>
-                    <a href="toiletry.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Toiletry</a>
-                    <a href="construction.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Construction</a>
-                    <a href="plant-hire.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Plant Hire</a>
-                    <a href="aggregates.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Aggregates</a>
-                    <a href="cleaning.html" class="nav-link text-gray-700 hover:text-green-600 font-medium">Cleaning</a>
-                    <a href="contact.html" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition font-medium">Contact Us</a>
+                    <a href="#home" class="nav-link text-gray-700 hover:text-green-600 font-medium">Home</a>
+                    <a href="#services" class="nav-link text-gray-700 hover:text-green-600 font-medium">Services</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-green-600 font-medium">About</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-green-600 font-medium">Contact</a>
+                    <a href="#contact" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition font-medium">Get in Touch</a>
                 </div>
-                
-                <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none" aria-label="Toggle menu">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
-        
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
             <div class="px-4 py-4 space-y-3">
-                <a href="index.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Home</a>
-                <a href="stationery.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Stationery</a>
-                <a href="toiletry.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Toiletry</a>
-                <a href="construction.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Construction</a>
-                <a href="plant-hire.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Plant Hire</a>
-                <a href="aggregates.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Aggregates</a>
-                <a href="cleaning.html" class="block text-gray-700 hover:text-green-600 font-medium py-2">Cleaning</a>
-                <a href="contact.html" class="block bg-green-600 text-white px-6 py-2 rounded-full text-center hover:bg-green-700 transition font-medium">Contact Us</a>
+                <a href="#home" class="block text-gray-700 hover:text-green-600 font-medium py-2">Home</a>
+                <a href="#services" class="block text-gray-700 hover:text-green-600 font-medium py-2">Services</a>
+                <a href="#about" class="block text-gray-700 hover:text-green-600 font-medium py-2">About</a>
+                <a href="#contact" class="block text-gray-700 hover:text-green-600 font-medium py-2">Contact</a>
+                <a href="#contact" class="block bg-green-600 text-white px-6 py-2 rounded-full text-center hover:bg-green-700 transition font-medium">Get in Touch</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center pt-20">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');"></div>
+    <!-- ========== HERO ========== -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 bg-fixed-hero" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-position: center;">
         <div class="absolute inset-0 bg-gradient-to-r from-green-900/90 to-green-700/80"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -157,10 +153,10 @@
                         <span class="text-yellow-300">Nothing Is Impossible!</span>
                     </h1>
                     <p class="text-xl text-green-100 mb-8 leading-relaxed">
-                        Makhethe Green Environment Consultancy (Pty) Ltd - Your trusted partner for quality stationery, construction, and environmental services in Lesotho since 2013.
+                        Makhethe Green Environment Consultancy (Pty) Ltd – Your trusted partner for quality stationery, construction, and environmental services in Lesotho since 2013.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="contact.html" class="bg-white text-green-700 px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 hover:text-green-800 transition pulse-animation">
+                        <a href="#contact" class="bg-white text-green-700 px-8 py-4 rounded-full font-semibold hover:bg-yellow-300 hover:text-green-800 transition pulse-animation">
                             Get Started <i class="fas fa-arrow-right ml-2"></i>
                         </a>
                         <a href="#services" class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-700 transition">
@@ -196,8 +192,8 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="py-20 bg-white">
+    <!-- ========== ABOUT ========== -->
+    <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 scroll-animate">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">About MGEC</h2>
@@ -206,7 +202,6 @@
                     Registered on 12th August 2013, we are committed to delivering quality services across Lesotho and beyond.
                 </p>
             </div>
-            
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="text-center p-8 bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl scroll-animate card-hover shadow-lg">
                     <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 float-animation">
@@ -215,7 +210,6 @@
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
                     <p class="text-gray-600">To become a reputable and trusted partner in delivering quality services in Lesotho and abroad.</p>
                 </div>
-                
                 <div class="text-center p-8 bg-gradient-to-br from-blue-50 to-cyan-100 rounded-2xl scroll-animate card-hover shadow-lg">
                     <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-6 float-animation">
                         <i class="fas fa-bullseye text-3xl text-white"></i>
@@ -223,7 +217,6 @@
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
                     <p class="text-gray-600">We strive to meet and exceed our client's expectations to foster long-term partnerships.</p>
                 </div>
-                
                 <div class="text-center p-8 bg-gradient-to-br from-yellow-50 to-orange-100 rounded-2xl scroll-animate card-hover shadow-lg">
                     <div class="w-20 h-20 bg-gradient-to-br from-yellow-600 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 float-animation">
                         <i class="fas fa-star text-3xl text-white"></i>
@@ -235,21 +228,19 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- ========== SERVICES ========== -->
     <section id="services" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 scroll-animate">
                 <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
                 <div class="w-24 h-1 bg-green-600 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Comprehensive solutions for all your business and personal needs
-                </p>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Comprehensive solutions for all your business and personal needs</p>
             </div>
-            
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="stationery.html" class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
+                <!-- Stationery -->
+                <a href="#contact" class="service-card-link bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1586075050922-2b453c4c8e65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stationery" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1586075050922-2b453c4c8e65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stationery" class="service-img" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Stationery & Office Equipment</h3>
@@ -257,10 +248,10 @@
                         <span class="text-green-600 font-semibold">Learn More <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-                
-                <a href="toiletry.html" class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
+                <!-- Toiletry -->
+                <a href="#contact" class="service-card-link bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581578731117-104f2a81232c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Toiletry" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1581578731117-104f2a81232c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Toiletry" class="service-img" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Toiletry Products</h3>
@@ -268,10 +259,10 @@
                         <span class="text-green-600 font-semibold">Learn More <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-                
-                <a href="construction.html" class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
+                <!-- Construction -->
+                <a href="#contact" class="service-card-link bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Construction" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Construction" class="service-img" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Construction Works & Supplies</h3>
@@ -279,10 +270,10 @@
                         <span class="text-green-600 font-semibold">Learn More <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-                
-                <a href="plant-hire.html" class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
+                <!-- Plant Hire -->
+                <a href="#contact" class="service-card-link bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plant Hire" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Plant Hire" class="service-img" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Plant Hire & Transport</h3>
@@ -290,10 +281,10 @@
                         <span class="text-green-600 font-semibold">Learn More <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-                
-                <a href="aggregates.html" class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
+                <!-- Aggregates -->
+                <a href="#contact" class="service-card-link bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aggregates" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aggregates" class="service-img" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Aggregates Supplies</h3>
@@ -301,10 +292,10 @@
                         <span class="text-green-600 font-semibold">Learn More <i class="fas fa-arrow-right ml-2"></i></span>
                     </div>
                 </a>
-                
-                <a href="cleaning.html" class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
+                <!-- Cleaning -->
+                <a href="#contact" class="service-card-link bg-white rounded-2xl overflow-hidden shadow-lg card-hover scroll-animate group">
                     <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cleaning" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cleaning" class="service-img" />
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-gray-800 mb-3">Cleaning Services</h3>
@@ -316,7 +307,7 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
+    <!-- ========== STATS ========== -->
     <section class="py-16 gradient-bg relative overflow-hidden">
         <div class="absolute inset-0 shimmer"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -341,21 +332,27 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-green-600 to-emerald-600 relative overflow-hidden">
+    <!-- ========== CTA / CONTACT ========== -->
+    <section id="contact" class="py-20 bg-gradient-to-r from-green-600 to-emerald-600 relative overflow-hidden">
         <div class="absolute inset-0 shimmer"></div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center scroll-animate relative z-10">
             <h2 class="text-4xl font-bold text-white mb-6">Ready to Work With Us?</h2>
             <p class="text-xl text-green-100 mb-8">
                 Contact us today and let's make your project a success. Working together, nothing is impossible!
             </p>
-            <a href="contact.html" class="inline-block bg-white text-green-700 px-10 py-4 rounded-full font-semibold hover:bg-yellow-300 hover:text-green-800 transition text-lg pulse-animation shadow-xl">
-                Contact Us Now <i class="fas fa-phone ml-2"></i>
+            <a href="mailto:info.mgec1@gmail.com?subject=Inquiry%20from%20website" class="inline-block bg-white text-green-700 px-10 py-4 rounded-full font-semibold hover:bg-yellow-300 hover:text-green-800 transition text-lg pulse-animation shadow-xl">
+                <i class="fas fa-envelope mr-2"></i> Email Us
             </a>
+            <p class="text-white/80 mt-6 text-lg">
+                <i class="fas fa-phone mr-2"></i> +266 62575270 / 62575280
+            </p>
+            <p class="text-white/60 mt-2">
+                LHDA Office Complex, Office No.03, Botha Bothe, Lesotho
+            </p>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ========== FOOTER ========== -->
     <footer class="bg-gray-900 text-white py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-4 gap-8">
@@ -369,22 +366,18 @@
                             <p class="text-xs text-gray-400">Since 2013</p>
                         </div>
                     </div>
-                    <p class="text-gray-400 mb-4">
-                        Makhethe Green Environment Consultancy (Pty) Ltd
-                    </p>
+                    <p class="text-gray-400 mb-4">Makhethe Green Environment Consultancy (Pty) Ltd</p>
                     <p class="text-green-400 font-semibold">Think Green! Nothing But Quality!</p>
                 </div>
-                
                 <div>
                     <h4 class="text-lg font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-green-400 transition">Home</a></li>
-                        <li><a href="stationery.html" class="text-gray-400 hover:text-green-400 transition">Stationery</a></li>
-                        <li><a href="construction.html" class="text-gray-400 hover:text-green-400 transition">Construction</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:text-green-400 transition">Contact</a></li>
+                        <li><a href="#home" class="text-gray-400 hover:text-green-400 transition">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-green-400 transition">Services</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-green-400 transition">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-green-400 transition">Contact</a></li>
                     </ul>
                 </div>
-                
                 <div>
                     <h4 class="text-lg font-bold mb-4">Contact Info</h4>
                     <ul class="space-y-3 text-gray-400">
@@ -393,7 +386,6 @@
                         <li><i class="fas fa-envelope mr-2 text-green-400"></i> info.mgec1@gmail.com</li>
                     </ul>
                 </div>
-                
                 <div>
                     <h4 class="text-lg font-bold mb-4">Business Details</h4>
                     <ul class="space-y-2 text-gray-400 text-sm">
@@ -404,49 +396,76 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
                 <p>&copy; 2024 MGEC (Pty) Ltd. All rights reserved. | www.mgec.co.ls</p>
             </div>
         </div>
     </footer>
 
+    <!-- ========== SCRIPTS ========== -->
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        (function() {
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+                // close on link click
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+                // close on outside click
+                document.addEventListener('click', function(e) {
+                    if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && e.target !== menuBtn && !menuBtn.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Scroll animations (IntersectionObserver)
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Navbar shadow on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.remove('shadow-lg');
                 }
             });
-        }, observerOptions);
-        
-        document.querySelectorAll('.scroll-animate').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-lg');
-            }
-        });
+
+            // Smooth anchor scroll (optional)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        })();
     </script>
 </body>
 </html>
